@@ -1,0 +1,5 @@
+solver,cases,solved,solved_pct,optimal,mean_extra_moves_when_solved,median_nodes,median_seconds,max_seconds
+IDA*,35,35,100.0,35,0,75,0.0007,0.08
+MCTS (sticker),35,29,82.9,23,0.93,1579,0.1269,4.479
+MCTS (PDB),35,27,77.1,16,1.11,1268,0.309,5.0
+MCTS (PDB + guided),35,35,100.0,15,1.31,6,0.0122,3.011
