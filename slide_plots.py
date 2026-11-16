@@ -91,3 +91,60 @@ if __name__ == "__main__":
     mcts_slide()
     heuristic_slide()
     print("saved slide plots")
+
+
+def pdb_histogram_slide():
+    """One big histogram of the corner pattern database (slide 6)."""
+    import contextlib, importlib.util, io, sys
+    import numpy as np
+    spec = importlib.util.spec_from_file_location("rubiks_cube_analysis", BASE / "rubiks_cube_analysis.py")
+    rca = importlib.util.module_from_spec(spec)
+    sys.modules["rubiks_cube_analysis"] = rca
+    with contextlib.redirect_stdout(io.StringIO()):
+        spec.loader.exec_module(rca)
+    d = np.asarray(list(rca.CORNER_DISTANCE.values()), dtype=int)
+    counts = np.bincount(d)
+    fig, ax = plt.subplots(figsize=(14, 8.5))
+    ax.bar(np.arange(len(counts)), counts, edgecolor="black", color=BLUE, width=0.75)
+    for x, c in enumerate(counts):
+        ax.text(x, c + 250, f"{c:,}", ha="center", va="bottom", fontsize=21)
+    ax.set_xticks(np.arange(len(counts)))
+    ax.set_xlabel("Distance h(s): moves to put the corners in place")
+    ax.set_ylabel("Number of corner arrangements")
+    ax.set_title("Histogram of all 40,320 corner arrangements")
+    ax.set_ylim(0, counts.max() * 1.12)
+    ax.grid(True, alpha=0.3, axis="y")
+    fig.tight_layout()
+    fig.savefig(OUT / "pdb_histogram_slide.png", dpi=150)
+    plt.close(fig)
+
+
+def ida_slide():
+    """Two-panel IDA* benchmark figure, wide enough to fill slide 7."""
+    import numpy as np
+    rows = list(csv.DictReader(open(BASE / "ida_plots" / "ida_benchmark_results.csv", newline="")))
+    rows = [r for r in rows if r["solved"] == "True"]
+    lengths = sorted({int(r["scramble_length"]) for r in rows})
+    nodes = [np.median([int(r["nodes"]) for r in rows if int(r["scramble_length"]) == n]) for n in lengths]
+    secs = [np.mean([float(r["seconds"]) for r in rows if int(r["scramble_length"]) == n]) for n in lengths]
+    fig, axes = plt.subplots(1, 2, figsize=(18, 10))
+    axes[0].plot(lengths, nodes, marker="o", color=BLUE)
+    axes[0].set_yscale("log")
+    axes[0].set_title("Nodes expanded")
+    axes[0].set_ylabel("Nodes (log scale)")
+    axes[1].plot(lengths, secs, marker="o", color="#f0a030")
+    axes[1].set_title("Run time")
+    axes[1].set_ylabel("Seconds")
+    for ax in axes:
+        ax.set_xlabel("Scramble length (moves)")
+        ax.set_xticks(lengths)
+        ax.grid(True, alpha=0.3)
+    fig.tight_layout()
+    fig.savefig(OUT / "ida_benchmark_slide.png", dpi=150)
+    plt.close(fig)
+
+
+if __name__ == "__main__":
+    pdb_histogram_slide()
+    ida_slide()
+    print("saved slide 6 and 7 plots")
