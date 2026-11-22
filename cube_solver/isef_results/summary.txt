@@ -1,0 +1,46 @@
+2x2x2 Rubik's Cube search benchmark
+Machine: x86_64, Linux, Python 3.13.18
+Positions per optimal distance: 20 (distance 1 has only 18)   distances: 1-9
+MCTS budget: 5 s or 50000 iterations, rollout depth 20
+BFS run for distances 1-5
+Seed: 2026   scrambles tried to fill the bins: 3781
+IDA* pattern database (40,320 corner permutations): 5.3 MB, built once
+
+dist  solver              solved      95% CI   median s  extra mv      states     mem KB
+----------------------------------------------------------------------------------------
+   1  BFS                18/18      82%-100%   1.57e-05         0         9.5       3.72
+   1  IDA*               18/18      82%-100%   2.15e-05         0         9.5       2.16
+   1  MCTS (sticker h)   18/18      82%-100%   0.000703         0         242         13
+   1  MCTS (corner h)    18/18      82%-100%    0.00134      0.11         211       10.1
+   2  BFS                20/20      84%-100%   0.000172         0         155       11.6
+   2  IDA*               20/20      84%-100%   2.66e-05         0          14       2.05
+   2  MCTS (sticker h)   20/20      84%-100%     0.0083       0.3    2.73e+03         62
+   2  MCTS (corner h)    20/20      84%-100%    0.00931       0.2    1.43e+03       57.7
+   3  BFS                20/20      84%-100%    0.00283         0     2.3e+03        343
+   3  IDA*               20/20      84%-100%   5.13e-05         0          24       4.26
+   3  MCTS (sticker h)   20/20      84%-100%      0.118       1.4    3.66e+04        610
+   3  MCTS (corner h)    20/20      84%-100%      0.169      0.65    2.33e+04        229
+   4  BFS                20/20      84%-100%     0.0363         0    2.81e+04   8.29e+03
+   4  IDA*               20/20      84%-100%   0.000119         0        65.5       31.3
+   4  MCTS (sticker h)   20/20      84%-100%      0.311       1.2    7.95e+04   9.87e+03
+   4  MCTS (corner h)    18/20       70%-97%      0.703       1.7    1.23e+05   2.41e+03
+   5  BFS                20/20      84%-100%      0.409         0    2.47e+05   3.94e+04
+   5  IDA*               20/20      84%-100%     0.0014         0         715        116
+   5  MCTS (sticker h)   12/20       39%-78%       1.05       3.9    4.66e+05   3.15e+04
+   5  MCTS (corner h)     4/20        8%-42%       1.36         3    6.85e+05    2.1e+04
+   6  IDA*               20/20      84%-100%     0.0133         0    7.41e+03        207
+   6  MCTS (sticker h)    3/20        5%-36%      0.504         2    1.05e+06   3.15e+04
+   6  MCTS (corner h)     1/20        1%-24%       1.46         5    6.68e+05   2.02e+04
+   7  IDA*               20/20      84%-100%      0.108         0    6.21e+04        207
+   7  MCTS (sticker h)    0/20        0%-16%          -         -    1.05e+06   3.15e+04
+   7  MCTS (corner h)     0/20        0%-16%          -         -    6.82e+05   2.05e+04
+   8  IDA*               20/20      84%-100%       1.65         0    9.05e+05        208
+   8  MCTS (sticker h)    0/20        0%-16%          -         -    1.05e+06   3.15e+04
+   8  MCTS (corner h)     0/20        0%-16%          -         -    6.75e+05   2.04e+04
+   9  IDA*               20/20      84%-100%       10.7         0    6.15e+06        209
+   9  MCTS (sticker h)    0/20        0%-16%          -         -    1.05e+06   3.15e+04
+   9  MCTS (corner h)     0/20        0%-16%          -         -    6.85e+05   2.01e+04
+
+IDA* solved 178/178 positions, all optimal. 158/178 finished within the MCTS time budget of 5 s.
+Slowest IDA* solve: 74.00 s.
+BFS agreed with IDA* on the optimal length of every position up to distance 5.
