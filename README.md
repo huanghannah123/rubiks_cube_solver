@@ -1,6 +1,6 @@
 # A Comparative Analysis of Heuristic and Pattern Database Search Algorithms for Optimal Solving of the Rubik's Cube State Space
 
-Hannah Huang, Friends Academy. ISEF category: Systems Software (SOFT). Presented at LISEF and NYSSEF.
+Hannah Huang, Friends Academy. ISEF category: Systems Software (SOFT). Presented at LISEF and ISEF.
 
 This project measures how much each step up in search strategy helps when solving the 2x2x2 Rubik's Cube (Pocket Cube) in Python. It compares breadth-first search (BFS), IDA* guided by pattern databases, and Monte Carlo Tree Search (MCTS) on the same cube positions. The 2x2x2 is the pilot puzzle because its full state space can be searched, so every solver's answer can be checked against the true shortest solution. The next step is the 3x3x3 cube.
 
