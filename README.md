@@ -28,7 +28,7 @@ Findings so far:
 3. MCTS solved every position up to 4 moves, then dropped to 12 of 20 at 5 moves, 3 of 20 at 6, and none from 7 to 9 within a 5-second budget. When it did solve a position, its solutions averaged up to about 4 moves longer than optimal.
 4. Heuristic quality drives IDA*'s speed. The corner-permutation pattern database ignores orientation, so it underestimates more as positions get harder (graph 6), and IDA*'s work grows quickly after distance 7. Adding a second pattern database for corner orientation and taking the larger of the two values cut the search for the sample scramble `R U R2 F D F2 U` from 3,126 nodes to 70 nodes, with the same 6-move optimal solution.
 
-All six graphs, the summary table, and the raw CSV data are in [`cube_solver/isef_results/`](cube_solver/isef_results/). The graphs in this repository come from a test run on a Linux computer. Runtimes depend on the machine, so the final presented numbers come from a rerun on the author's laptop.
+All six graphs, the summary table, and the raw CSV data are in [`cube_solver/isef_results/`](cube_solver/isef_results/). The graphs in this repository come from a test run on a Windows computer. 
 
 ![Benchmark results](cube_solver/isef_results/all_figures.png)
 
